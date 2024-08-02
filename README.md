@@ -1,8 +1,5 @@
 # DESAFIO-BEEDOO
 
-Link para acesso a planilha com os casos de teste e artefatos criados com as evidencias de erros criados:
-<https://drive.google.com/drive/folders/12jJx4P1qKZF1GYUCLnufqXkl82S_henC?usp=sharing>
-
 ## Etapa 1
 
 ### User Story
@@ -77,5 +74,40 @@ Para criar a história de usuário, primeiramente foi analisado os dados dispon�
 4. O usuário deve receber uma confirmação visual de que o curso foi excluído com sucesso.
 
 ---
-### Cenarios de teste
+### Cenarios e Casos de teste, passo a passo
 
+Os cenarios de teste e o passo a passo para reproduzi-los podem ser acessados atraves do link <https://docs.google.com/document/d/1uNVSW3sQI5-_ympsI7ewzEQcRuFFIPY8xzinEOpFSOA/edit?usp=sharing>.
+
+
+---
+### Evidencias de Testes
+As evidencias dos testes podem ser acessadas atraves do link <https://drive.google.com/drive/folders/14Ba-lnG-lI9_LLUlG8umNDkjtBjR_jpl?usp=sharing>.
+
+---
+## Etapa 2
+
+Para a documentação dos testes a metodologia usada foi o kanban, com a ferramenta jira, uma vez que dessa forma posso rastriar todo o ciclo de correção.
+Colocando no card a explicação do erro que esta acontecendo, alem de poder colocar o responsavel por essa demanda e no campo de comentarios as decisões que foram tomadas e possiveis contratempos.
+
+### Lista de erros encontrados
+1. Criação de cursos sem dados
+Uma demanda considerada de criticidade muito alta, uma vez que para a criação de um curso é necessario que tenha minimamente o nome, esse erro ocorre devido a falta de uma validação nos campos e por não possuir um sistema de campos obrigatorios
+2. Criar um curso passando um link de video
+Esse erro ocorre pois não existe nenhuma validação para saber se o link informado é realmente de um video, ao não ser feita essa validação e criar o card o campo que devia estar a imagem vem em branco
+3. Seleção de datas
+Ao selecionar as datas os selects colocar datas invalidas, tanto da forma escrita quanto clicando nos dias, dessa forma é possivel criar um curso com dia que já passou. Isso ocorre pela falta de uma validação dos campos, tanto escrito, quanto selecionando o dia
+4. Erro 405 ao tentar excluir um curso
+Ao tentar excluir um curso aparece a mensagem de sucesso porem esse curso não é excluido. Isso ocorre devido a um erro na requisição, que ao enviar a requisição no servidor o metodo delete não é reconhecido como um metodo valido e com isso retorna a mensagem de erro.
+O front end tambem deveria retornar uma mensagem de erro inves de uma mensagem de exclusão bem sucedida, ainda mais que o codigo da requisição não foi 200, que é o codigo para que a requisição foi bem sucessedida
+5. Numero negativo na quantidade de vagas
+Não deveria ser possivel selecionar um numero negativo de pessoas, pois não existem vagas negativas, isso acontece devido a falta de uma validação na quantidade de vagas, que não permite ir para numeros negativos pelo select e caso digitasse um numero negativo ele deveria automaticamente mudar para 0
+
+---
+### Vulnerabilidade
+1. Não possuir validação de url
+O sistema permite que eu passe qualquer tipo de url, dessa forma é possivel mandar a url de um site malicioso e então assim infectar o sistema
+2. Sql Injection
+O sistema esta sujeito a ataques de sql injection, uma vez q seus campos não possuem nenhum tipo de validação
+3. Faria testes de penetração utilizando a owasp 10, verificando quais das vulnerabilidades mais comuns o sistema esta sujeito
+
+---
